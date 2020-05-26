@@ -10,39 +10,6 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
-    <!-- <script src="./jquery.form.js" type="text/javascript"></script> -->
-
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script>
-    $(document).ready(function() {
-
-        $("#file").on("change", function() {
-            if ($(this).val() != "") {
-                $("#formEnviarArquivo").ajaxForm({
-                    uploadProgress: function(event, position, total, percentComplete) {
-                        $(".progress").show();
-                        $("#progress_bar").attr("style", "width: " + percentComplete + "%");
-                        $("#progress_bar").html("<span class=\"sr-only\">" +
-                            percentComplete + "% Complete</span>");
-                    },
-                    success: function(data) {
-                        console.log("Enviado com sucesso: " + data);
-                    },
-                    error: function(data) {
-                        console.log("Error: " + data);
-                    },
-                    dataType: 'json',
-                    url: " upload.php "
-                }).submit();
-            }
-        });
-
-    });
-    </script>
-
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -57,7 +24,7 @@ session_start();
 </head>
 
 <body>
-<div class="row justify-content-md-center">
+    <div class="row justify-content-md-center">
 
         <div class="container col-md-6">
             <div class="alert alert-primary text-center mt-5 text-uppercase" role="alert">
@@ -132,27 +99,31 @@ session_start();
                 </div>
                 <button class="submit btn btn-primary btn-block mt-3">Enviar</button>
 
+                <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar" style="width: 0%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             </form>
 
 
 
-            <div class="progress mt-1" style="display:none">
-                <div class="progress-bar progress-bar-success progress-bar-striped" id="progress_bar" role="progressbar"
-                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                    <span class="sr-only">0% Complete (success)</span>
-                </div>
-            </div>
+          
 
 
 
         </div>
 
-    <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center">
 
 
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
                 crossorigin="anonymous">
