@@ -73,11 +73,11 @@ else {
 // Primeiro verifica se deve trocar o nome do arquivo
 if ($_UP['renomeia'] == true) {
 // Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
-$nome_final = $livro." - ".$nome." - ".$setor." - ".$data.".".$extensao;
+time().$nome_final = $livro." - ".$nome." - ".$setor." - ".$data.".".$extensao;
 } else {
 // Mantém o nome original do arquivo
 //$nome_final = $_FILES['arquivo']['name'];
-$nome_final = $livro." - ".$nome." - ".$setor." - ".$data.".".$extensao;
+$nome_final = time().$livro." - ".$nome." - ".$setor." - ".$data.".".$extensao;
 }
  
 // Depois verifica se é possível mover o arquivo para a pasta escolhida

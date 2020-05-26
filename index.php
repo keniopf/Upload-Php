@@ -14,8 +14,38 @@ session_start();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-        <script src="js.js"></script>
-        <link href="css.css" rel="stylesheet">
+    <script src="jquery.form.js" type="text/javascript"></script>
+    <script>
+    $(document).ready(function() {
+
+        $("#file").on("change", function() {
+            if ($(this).val() != "") {
+                $("#formEnviarArquivo").ajaxForm({
+                    uploadProgress: function(event, position, total, percentComplete) {
+                        $(".progress").show();
+                        $("#progress_bar").attr("style", "width: " + percentComplete + "%");
+                        $("#progress_bar").html("<span class=\"sr-only\">" +
+                            percentComplete + "% Complete</span>");
+                    },
+                    success: function(data) {
+                        console.log("Enviado com sucesso: " + data);
+                    },
+                    error: function(data) {
+                        console.log("Error: " + data);
+                    },
+                    dataType: 'json',
+                    url: " functions.php "
+                }).submit();
+            }
+        });
+
+    });
+    </script>
+
+
+
+
+
 
 
     <title>Arquivos Externos</title>
@@ -36,7 +66,7 @@ session_start();
             ?>
 
 
-        <form enctype="multipart/form-data" action="upload.php" method="POST">
+        <form enctype="multipart/form-data" action="upload.php" method="POST" id="formEnviarArquivo">
 
 
             <div class="input-group mb-3">
@@ -88,17 +118,25 @@ session_start();
                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                 </div>
                 <div class="custom-file">
-                    <input name="arquivo" type="file" class="custom-file-input" id="inputGroupFile01"
+                    <input name="arquivo" type="file" class="custom-file-input" id="file"
                         aria-describedby="inputGroupFileAddon01">
                     <label class="custom-file-label" for="inputGroupFile01">Envie seu arquivo...</label>
                 </div>
             </div>
-            <button class="submit btn btn-primary btn-block mt-3">Enviar</button>
+            <button class="submit btn btn-primary btn-block mt-3" >Enviar</button>
+
+           
         </form>
 
-        <div id="myProgress">
-            <div id="myBar"></div>
-        </div>
+       
+
+        <div class="progress" >
+                <div class="progress-bar progress-bar-success progress-bar-striped" id="progress_bar" role="progressbar"
+                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span class="sr-only">0% Complete (success)</span>
+                </div>
+            </div>
+
 
 
     </div>
